@@ -11,7 +11,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = '5-0oxnawjh(!ao57=f87ah-l^mt_cyk@1m+4zil6ikm=0d8(y%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'megatodo.herokuapp.com',
@@ -65,7 +65,11 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+
+
+DATABASES = {
+    'default' : dj_database_url.config()
+}
 
 
 
