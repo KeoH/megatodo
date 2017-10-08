@@ -13,7 +13,10 @@ SECRET_KEY = '5-0oxnawjh(!ao57=f87ah-l^mt_cyk@1m+4zil6ikm=0d8(y%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'megatodo.herokuapp.com',
+    'todo.framanmag.com'
+]
 
 
 # Application definition
