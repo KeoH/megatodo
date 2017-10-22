@@ -8,7 +8,11 @@ from .serializers.task import TaskSerializer
 from .serializers.user import UserSerializer
 from .serializers.comment import CommentSerializer
 
+
 class TodoViewSet(viewsets.ModelViewSet):
+    """
+        Serializer for Todo model
+    """
     serializer_class = TodoSerializer
 
     def get_queryset(self):
@@ -19,13 +23,24 @@ class TodoViewSet(viewsets.ModelViewSet):
 
 
 class TaskViewSet(viewsets.ModelViewSet):
+    """
+        Serializer for Task model
+    """
     serializer_class = TaskSerializer
     queryset = Task.objects.all()
 
+
 class UserViewSet(viewsets.ModelViewSet):
+    """
+        Serializer for User model
+    """
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+
 class CommentViewSet(viewsets.ModelViewSet):
+    """
+        Serializer for Todo model
+    """
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
