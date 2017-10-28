@@ -8,4 +8,4 @@ class TaskSerializer(StatusSerializerMixin):
 
     class Meta:
         model = Task
-        fields = ('id','title','status', 'status_verbose','create_date', 'update_date')
+        fields = ('id','title','todo','status', 'status_verbose','create_date', 'update_date')

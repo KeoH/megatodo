@@ -21,6 +21,9 @@ class Task(UUIDableBehaviour, TimestampableBehaviour, StatustableBehaviour, DueD
     def __str__(self):
         return self.title
 
+    class Meta:
+        ordering = ['-create_date']
+
 class Comment(UUIDableBehaviour, TimestampableBehaviour):
 
     author = models.ForeignKey(User, related_name='comments')
