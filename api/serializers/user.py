@@ -1,3 +1,7 @@
+'''
+    Module for user related serializers
+'''
+
 from django.contrib.auth.models import User, Group
 
 from rest_framework import serializers
@@ -5,14 +9,18 @@ from rest_framework import serializers
 from ..mixins.serializers import AvatarSerializerMixin
 
 class GroupSerializer(serializers.ModelSerializer):
-
+    '''
+        Group serializer
+    '''
     class Meta:
         model = Group
         fields = ('name',)
 
 
 class UserSerializer(AvatarSerializerMixin):
-
+    '''
+        User serializer
+    '''
     
     groups = GroupSerializer(many=True)
     groups_list = serializers.SerializerMethodField()
@@ -25,7 +33,9 @@ class UserSerializer(AvatarSerializerMixin):
         return [group.name for group in obj.groups.all() ]
 
 class UserSimpleSerializer(AvatarSerializerMixin):
-
+    '''
+        Simplified version of the user serializer
+    '''
     class Meta:
         model = User
         fields = ('username', 'avatar')

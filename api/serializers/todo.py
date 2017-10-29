@@ -1,4 +1,7 @@
-from django.contrib.auth.models import User
+'''
+    Module for ToDo serializer
+'''
+
 from rest_framework import serializers
 
 from todos.models import Todo
@@ -9,6 +12,9 @@ from .user import UserSimpleSerializer
 from .comment import CommentSerializer
 
 class TodoSerializer(StatusSerializerMixin):
+    '''
+        Basic serializer of the ToDo model
+    '''
 
     tasks = TaskSerializer(many=True, read_only=True)
     comments_count = serializers.SerializerMethodField()
@@ -16,20 +22,18 @@ class TodoSerializer(StatusSerializerMixin):
     author = UserSimpleSerializer(read_only=True)
 
     class Meta:
+        '''
+            The meta class
+        '''
         model = Todo
         fields = (
             'id', 'title', 'author', 'status', 'status_verbose', 
             'is_complete', 'is_canceled', 'is_expired', 'due_date', 
             'comments_count', 'comments', 'body', 'tasks', 'create_date', 
-            'update_date'
-        )
-
-    # def validate_author(self, value):
-    #     try:
-    #         user = User.objects.get(username=value)
-    #     except Exception as e:
-    #         raise serializers.ValidationError("Author not found") 
-    #     return user.id
+            'update_date',)
 
     def get_comments_count(self, obj):
+        '''
+            Counts elements for serializer
+        '''
         return obj.comments.count()

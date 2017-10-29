@@ -5,7 +5,9 @@ from core.behaviours import UUIDableBehaviour, TimestampableBehaviour, Statustab
 
 
 class Todo(UUIDableBehaviour, TimestampableBehaviour,StatustableBehaviour, DueDateBehaviour):
-    
+    '''
+        Todo Model
+    '''
     author = models.ForeignKey(User, related_name='todos')
     title  = models.CharField(max_length=255)
     body   = models.TextField()
@@ -14,7 +16,9 @@ class Todo(UUIDableBehaviour, TimestampableBehaviour,StatustableBehaviour, DueDa
         return self.title
 
 class Task(UUIDableBehaviour, TimestampableBehaviour, StatustableBehaviour, DueDateBehaviour):
-
+    '''
+        Task model
+    '''
     todo = models.ForeignKey(Todo, related_name='tasks')
     title = models.CharField(max_length=255)
 
@@ -25,8 +29,9 @@ class Task(UUIDableBehaviour, TimestampableBehaviour, StatustableBehaviour, DueD
         ordering = ['-create_date']
 
 class Comment(UUIDableBehaviour, TimestampableBehaviour):
-
+    '''
+        Comment model
+    '''
     author = models.ForeignKey(User, related_name='comments')
     todo = models.ForeignKey(Todo, related_name='comments')
     message = models.TextField()
-    
