@@ -27,10 +27,12 @@ class UserSerializer(AvatarSerializerMixin):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'avatar', 'groups', 'groups_list')
+        lookup_field = 'username'
+        fields = ('pk','username', 'email', 'avatar', 'groups', 'groups_list')
 
     def get_groups_list(self, obj):
         return [group.name for group in obj.groups.all() ]
+
 
 class UserSimpleSerializer(AvatarSerializerMixin):
     '''
@@ -38,4 +40,5 @@ class UserSimpleSerializer(AvatarSerializerMixin):
     '''
     class Meta:
         model = User
-        fields = ('username', 'avatar')
+        lookup_field = 'username'
+        fields = ('username', 'avatar', 'pk')
