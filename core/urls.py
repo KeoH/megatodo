@@ -10,6 +10,6 @@ urlpatterns = [
     url(r'^api/v1/', include('api.urls', namespace='api')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api-token-auth/', obtain_jwt_token),
-    url(r'^$', TemplateView.as_view(template_name="index.html"))
+    url(r'^', TemplateView.as_view(template_name="index.html"))
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
