@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import viewsets
+from rest_framework.response import Response
 
 from todos.models import Todo, Task, Comment
 
@@ -20,6 +21,14 @@ class TodoViewSet(viewsets.ModelViewSet):
             return Todo.objects.filter(author=self.request.user)
         else:
             return Todo.objects.none()
+
+    def create(self,request):
+        todo = Todo.objects.create(
+            author=request.user,
+            title = request.data.get('title'),
+            body = request.data.get('body')
+        )
+        return Response(TodoSerializer(todo).data, status=201)
 
 
 class TaskViewSet(viewsets.ModelViewSet):
@@ -44,3 +53,20 @@ class CommentViewSet(viewsets.ModelViewSet):
     """
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+
+    def create(self, request):
+        try:
+            author = User.objects.get(username=request.data.get('author'))
+        except Exception:
+            return Response({"error":"Author not found"}, status=400)
+        try:
+            todo = Todo.objects.get(pk=request.data.get('todo'))
+        except Exception:
+            return Response({"error":"ToDo not found"}, status=400)
+        
+        comment = Comment.objects.create(
+            author=author,
+            message=request.data.get('message'),
+            todo = todo
+        )
+        return Response(CommentSerializer(comment).data, status=201)

@@ -14,6 +14,9 @@ class Todo(UUIDableBehaviour, TimestampableBehaviour,StatustableBehaviour, DueDa
 
     def __str__(self):
         return self.title
+    
+    class Meta:
+        ordering = ['-create_date']
 
 class Task(UUIDableBehaviour, TimestampableBehaviour, StatustableBehaviour, DueDateBehaviour):
     '''
@@ -35,3 +38,6 @@ class Comment(UUIDableBehaviour, TimestampableBehaviour):
     author = models.ForeignKey(User, related_name='comments')
     todo = models.ForeignKey(Todo, related_name='comments')
     message = models.TextField()
+    
+    class Meta:
+        ordering = ['-create_date']
